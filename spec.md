@@ -8,14 +8,17 @@ The protocol *ONLY* uses UDP, any packets that need to be sent reliablely must u
 
 In the tables below, "(BE)" represents Big Endian byte order and "(LE)" represents Little Endian byte order.
 
-### <a name="unknowns"></a>Important 'Unknowns'
-The maximum UDP packet size that the original client and server can handle seems to be around 500-600 bytes, it might be exactly 580 (0x244).
+### <a name="constants"></a>Constants
+```
+#define MAX_PACKET_SIZE 0x224
+```
 
 # <a name="translayer"></a>Transmission layer
 This section encompasses the stuff that is more associated with transmission of the data. Such as the packets moving straight from/to udp, packet grouping, and delta compresssion.
 
+
 ### <a name="udpmessage"></a>UDP Message
-| 4 bytes (BE)  | [∞ bytes(?)](#unknowns)               |
+| 4 bytes (BE)  | [Up to [MAX_PACKET_SIZE](#constants) bytes)       |
 |---------------|---------------------------------------|
 | CRC-32 (IEEE) | [][Grouped packet](#groupedpacket) |
 
