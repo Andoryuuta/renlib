@@ -28,15 +28,15 @@ func ParseFile(filename string) (*MixFile, error) {
 		return nil, err
 	}
 
-	return ParseMixFileFromReader(f)
+	return ParseFromReader(f)
 }
 
 func ParseBytes(data []byte) (*MixFile, error) {
 	r := bytes.NewReader(data)
-	return ParseMixFileFromReader(r)
+	return ParseFromReader(r)
 }
 
-func ParseMixFileFromReader(f ReadAtSeeker) (*MixFile, error) {
+func ParseFromReader(f ReadAtSeeker) (*MixFile, error) {
 	// Read in file magic and verify.
 	// It should be equal to "MIX1"
 	magic, err := ReadFixedUTF8String(f, 4)
