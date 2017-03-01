@@ -1,8 +1,8 @@
-package io
+package mix
 
 import (
-	"io"
 	"errors"
+	"io"
 )
 
 // ReadAtSeeker embeds io.ReadSeeker and io.ReaderAt
@@ -11,7 +11,6 @@ type ReadAtSeeker interface {
 	io.ReadSeeker
 	io.ReaderAt
 }
-
 
 // Reads in a fixed length UTF8 string.
 func ReadFixedUTF8String(rdr io.Reader, size int) (string, error) {
@@ -28,4 +27,3 @@ func ReadFixedUTF8String(rdr io.Reader, size int) (string, error) {
 	// Though I can't find any document describing this.
 	return string(out), nil
 }
-
