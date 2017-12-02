@@ -4,7 +4,7 @@
 C&C: Renegade development started approximately around 1998 ~ 1999, when 56k modems were in widespread use (According to wikipedia atleast). Because of the data restrictions, the protocol uses large amounts of bitpacking, delta compression, and floating point number scaling  
 
 ### <a name="notes"></a>Notes
-The protocol *ONLY* uses UDP, any packets that need to be sent reliablely must use a proprietary TCP-esque method of acknowledging packets built on top of UPD.
+The protocol *ONLY* uses UDP, any packets that need to be sent reliably must use a proprietary TCP-esque method of acknowledging packets built on top of UDP.
 
 In the tables below, "(BE)" represents Big Endian byte order and "(LE)" represents Little Endian byte order.
 
