@@ -1,4 +1,4 @@
-#**WARING: (Work In Progress)** Extremely disorganized, lack of information, etc.
+#**WARNING: (Work In Progress)** Extremely disorganized, lack of information, etc.
 
 ### <a name="preface"></a>Preface
 C&C: Renegade development started approximately around 1998 ~ 1999, when 56k modems were in widespread use (According to wikipedia atleast). Because of the data restrictions, the protocol uses large amounts of bitpacking, delta compression, and floating point number scaling  
