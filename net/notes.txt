@@ -1,0 +1,161 @@
+ChunkIDs:
+0x890100 -- PhysicsSceneClass::Load_Dynamic_Objects:
+
+0x890200 -- PhysicsSceneClass::Load_Static_Object_States
+0x890001 -- PhysicsSceneClass::Load_LDD_Variables
+
+
+
+
+Template:
+	Occasional:
+		x
+		
+	Frequent:
+		x
+		
+	Creation:
+		x
+		
+	Rare:
+		x
+
+PlayerDataClass:
+	Occasional:
+		Get_Bits(0x20) // Score
+		Internal_Get<float>(-1) // Money
+		
+	Frequent:<!exist>
+	Creation:<!exist>
+	Rare:<!exist>
+
+cPlayer:
+	Occasional:
+		PlayerDataClass:Occasional
+		Internal_Get<int>(-1) // Kills
+		Internal_Get<int>(-1) // Deaths
+		
+	Frequent:
+		NetworkObjectClass:Frequent
+		
+	Creation:
+		Get_Wide_Terminated_String(0x100)
+		
+	Rare:
+		Get_Bits(0x20) // ID
+		Internal_Get<int>(-1) // Ladder points
+		Internal_Get<int>(-1) // Player type
+		Internal_Get<int>(-1) // Damage scale factor
+		Internal_Get<int>(-1) // Ping
+		Get() // Is in game
+		Get()
+		Get() // Is Active
+		Internal_Get<int>(-1)
+		Internal_Get<int>(-1)
+
+
+NetworkObjectClass:
+	Occasional:
+		<null>
+		
+	Frequent:
+		<null>
+		
+	Creation:
+		<null>
+		
+	Rare:
+		<null>
+
+CSAnnouncement:
+	Occasional: NetworkObjectClass
+	Frequent: NetworkObjectClass
+
+	Creation:
+		cNetEvent:Creation
+		Get_Bits(0x20)
+		Internal_Get<int>(-1)
+		Internal_Get<int>(-1)
+		Internal_Get<int>(-1)
+		Get_Bits(0x8)
+
+	Rare: NetworkObjectClass
+
+
+SCAnnouncement:
+	Occasional: NetworkObjectClass
+	Frequent: NetworkObjectClass
+		
+	Creation:
+		cNetEvent:Creation
+		Internal_Get<int>(-1)
+		Internal_Get<int>(-1)
+		Internal_Get<int>(-1)
+		Internal_Get<int>(-1)
+		Internal_Get<unsigned char>(-1)
+		
+	Rare: NetworkObjectClass
+
+
+cBioEvent:
+	Occasional: NetworkObjectClass
+	Frequent: NetworkObjectClass
+		
+	Creation:
+		cNetEvent:Creation
+		Get_Bits(0x20) // ID
+		Get_Wide_Terminated_String(0x100) // Nickname
+		Internal_Get<int>(-1)
+		Get_Bits(0x20)
+		Get_Terminated_String(0x100)
+
+		
+	Rare: NetworkObjectClass
+
+
+
+Template:
+	Occasional:
+		
+		
+	Frequent:
+		x
+		
+	Creation:
+		cNetEvent:Creation
+		Get_Bits(0x20) // ID
+
+		
+	Rare:
+		x
+
+
+
+
+PhysicalGameObj:
+	Occasional:
+		x
+		
+	Frequent:
+		Get()
+		
+	Creation:
+		ScriptableGameObj:Creation
+		Internal_Get<float>(0)
+		Internal_Get<float>(1)
+		Internal_Get<float>(2)
+		Internal_Get<float>(-1)
+		
+	Rare:
+		Get_Terminated_String(0x100)
+		Get_Terminated_String(0x100)
+		Get_Bits(0x20)
+		Internal_Get<int>(-1)
+		Internal_Get<int>(-1)
+		Internal_Get<int>(-1)
+		Internal_Get<int>(-1)
+		Internal_Get<int>(-1)
+		Get()
+		if(?){
+			Get()
+		}
