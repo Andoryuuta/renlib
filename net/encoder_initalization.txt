@@ -1,0 +1,93 @@
+void InitByValues(BitPackType t, double min, double max, double resolution) {
+	Encoder enc = GetEncoderByType(t)
+	enc.Min = min;
+	enc.Max = max;
+	//enc.CalculateBitPrecision(resolution)
+	//{
+	signed __int64 v5; // rax@1
+	int v6; // ecx@2
+	v5 = (signed __int64)(ceil((Max - Min) / Resolution - 0.000099999997) + 1.0);
+	bits_count_v5_high = 0;
+	enc_0->Resolution = 0;
+	if ( (_DWORD)v5 )
+	{
+		do
+		{
+			v6 = enc_0->Resolution;
+			bits_count_v5_high += 1 << v6++;
+			enc_0->Resolution = v6;
+			if ( v6 == 1 )
+				++bits_count_v5_high;
+		}
+		while ( bits_count_v5_high < (unsigned int)v5 );
+	}
+	enc_0->BitPrecision = (enc_0->Max - enc_0->Min) / (double)(unsigned int)(bits_count_v5_high - 1);
+	//}
+}
+
+void InitByFixedB(BitPackType t, int bits){
+	Encoder enc = GetEncoderByType(t)
+	enc.Min = 0.0;
+
+	// Calculate max.
+	uint max = 0;
+	for(int i = 0; i < bits; ++i){
+		max += 1 << i;
+	}
+	enc.Max = max;
+
+	enc.Resolution = 1.0
+	enc.BitPrecision = bits;
+}
+
+
+================================================================================================================
+
+
+DYNAMIC:
+	/*
+	Vector3 Vec1;
+	Vector3 Vec2;
+	PhysicsSceneClass::Get_Level_Extents(PhysicsSceneClass::TheScene, &Vec2, &Vec1);
+	maximumWorldDist = sqrt(
+	               (Vec1.X - Vec2.X) * (Vec1.X - Vec2.X)
+	             + (Vec1.Y - Vec2.Y) * (Vec1.Y - Vec2.Y)
+	             + (Vec1.Z - Vec2.Z) * (Vec1.Z - Vec2.Z));
+
+	cGameData::Set_Maximum_World_Distance(The_Game(), maximumWorldDist);
+	*/
+
+	0x00: InitByValues(BITPACK_WORLD_POSITION_X, Vec2.X - 1.0, Vec1.X + 1.0, 0.2);
+	0x01: InitByValues(BITPACK_WORLD_POSITION_Y, Vec2.Y - 1.0, Vec1.Y + 1.0, 0.2);
+	0x02: InitByValues(BITPACK_WORLD_POSITION_Z, Vec2.Z - 1.0, Vec1.Z + 1.0, 0.2);
+
+
+
+
+0x03: InitByFixedB(BITPACK_ONE_TIME_BOOLEAN_BITS, 23)
+0x04: InitByFixedB(BITPACK_CONTINUOUS_BOOLEAN_BITS, 4)
+0x05: InitByValues(BITPACK_ANALOG_VALUES, -1.0, 1.0, 0.01);
+0x06: InitByValues(BITPACK_HEALTH, 0.0, 2000.0, 1)
+0x07: InitByValues(BITPACK_SHIELD_STRENGTH, 0.0, 2000.0, 1);
+
+DYNAMIC:
+	double armorTypes = ArmorWarheadManager::Get_Num_Armor_Types(COERCE_UNSIGNED_INT64(v0));
+	0x08: InitByValues(BITPACK_SHIELD_TYPE, 0.0, armorTypes, 1); 
+
+0x09: UNUSED -- BITPACK_CTF_TEAM_FLAG
+0x0A: InitByValues(BITPACK_HUMAN_STATE, 0.0, 19.0, 1)
+0x0B: InitByValues(BITPACK_HUMAN_SUB_STATE, 0.0, 511.0, 1)
+0x0C: InitByValues(BITPACK_VEHICLE_VELOCITY, -90.0, 90.0, 0.009999999776482582)
+0x0D: InitByValues(BITPACK_VEHICLE_ANGULAR_VELOCITY, -20.0, 20.0, 0.009999999776482582)
+0x0E: InitByValues(BITPACK_VEHICLE_QUATERNION, -1.0, 1.0, 0.0005000000237487257)
+0x0F: InitByValues(BITPACK_VEHICLE_LOCK_TIMER, 0.0, 16.0, 0.25)
+0x10: InitByValues(BITPACK_DOOR_STATE, 0.0, 5.0, 1.0)
+0x11: InitByValues(BITPACK_ELEVATOR_STATE, 0.0, 4.0, 1)
+0x12: InitByValues(BITPACK_ELEVATOR_TOP_DOOR_STATE, 0.0, 3.0, 1)
+0x13: InitByValues(BITPACK_ELEVATOR_BOTTOM_DOOR_STATE, 0.0, 3.0, 1)
+0x14: InitByValues(BITPACK_BUILDING_RADIUS, 0.0, 50.0, 0.1)
+0x15: InitByValues(BITPACK_BUILDING_STATE, -1.0, 10.0, 1.0)
+0x16: InitByFixedB(BITPACK_CONTROL_MOVES_CS, 8)
+0x17: InitByFixedB(BITPACK_CONTROL_MOVES_SC, 6)
+0x18: InitByFixedB(BITPACK_PACKET_TYPE, 4)
+0x19: InitByFixedB(BITPACK_PACKET_ID, 28)
